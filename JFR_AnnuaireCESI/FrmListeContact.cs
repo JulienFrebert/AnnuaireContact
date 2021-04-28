@@ -13,6 +13,7 @@ namespace JFR_AnnuaireCESI
 {
     public partial class FrmListeContact : Form
     {
+
         #region Objet global 
 
         ManagerPersonn ObjBdd = new ManagerPersonn();
@@ -99,6 +100,11 @@ namespace JFR_AnnuaireCESI
         private void Btn_Quitter_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Btn_Generer_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

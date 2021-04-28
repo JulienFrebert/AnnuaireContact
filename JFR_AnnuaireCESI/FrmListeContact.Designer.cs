@@ -48,6 +48,7 @@
             this.BtnRecherche = new System.Windows.Forms.Button();
             this.BtnReafficher = new System.Windows.Forms.Button();
             this.Btn_Quitter = new System.Windows.Forms.Button();
+            this.Btn_Generer = new System.Windows.Forms.Button();
             this.GbxListe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DtgListeContact)).BeginInit();
             this.GbxDetail.SuspendLayout();
@@ -243,11 +244,22 @@
             this.Btn_Quitter.UseVisualStyleBackColor = true;
             this.Btn_Quitter.Click += new System.EventHandler(this.Btn_Quitter_Click);
             // 
+            // Btn_Generer
+            // 
+            this.Btn_Generer.Location = new System.Drawing.Point(211, 713);
+            this.Btn_Generer.Name = "Btn_Generer";
+            this.Btn_Generer.Size = new System.Drawing.Size(154, 41);
+            this.Btn_Generer.TabIndex = 7;
+            this.Btn_Generer.Text = "Génération";
+            this.Btn_Generer.UseVisualStyleBackColor = true;
+            this.Btn_Generer.Click += new System.EventHandler(this.Btn_Generer_Click);
+            // 
             // FrmListeContact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1720, 754);
+            this.Controls.Add(this.Btn_Generer);
             this.Controls.Add(this.Btn_Quitter);
             this.Controls.Add(this.BtnReafficher);
             this.Controls.Add(this.BtnRecherche);
@@ -290,6 +302,7 @@
         private System.Windows.Forms.Label LblPrenom;
         private System.Windows.Forms.Label LblNom;
         private System.Windows.Forms.Button Btn_Quitter;
+        private System.Windows.Forms.Button Btn_Generer;
     }
 }
 

@@ -25,6 +25,7 @@ namespace JFR_AnnuaireCESI
 
         string API_RAMDOM_USER = "https://randomuser.me/api/";
 
+
         HttpClient client = new HttpClient();
 
 
@@ -154,7 +155,11 @@ namespace JFR_AnnuaireCESI
 
         async Task<string> getRamdomUser()
         {
-            client.BaseAddress = new Uri(API_RAMDOM_USER);
+            Uri URI = new Uri(API_RAMDOM_USER);
+            if (URI == null)
+            {
+                client.BaseAddress = URI;
+            }
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

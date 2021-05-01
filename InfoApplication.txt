@@ -1,0 +1,8 @@
+Informations concernant l'application : 
+
+Je l'ai écrit en C# avec visual studio 2015 
+j'ai utilisé PhpMyAdmin pour la gestion de la base de données 
+
+Pour générer une nouvelle personne il suffit de cliquer sur Générer 
+
+Il y'a 2 types de recherche soit par nom ou par entreprise (attention pour le nom il ne faut pas mettre le titre "Mr ou Mme")

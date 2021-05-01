@@ -97,9 +97,7 @@ namespace JFR_AnnuaireCESI
         private void Btn_Generer_Click(object sender, EventArgs e)
         {
             #region Récupération des valeurs
-
-            var JSON = "";
-                JSON =  getRamdomUser().GetAwaiter().GetResult();
+           var JSON =  getRamdomUser().GetAwaiter().GetResult();
            var data = JObject.Parse(JSON).SelectToken("results").ToObject<List<Personne>>().First();
 
             #endregion
@@ -108,19 +106,35 @@ namespace JFR_AnnuaireCESI
 
             Personne.Name name = new Personne.Name(data.name.title.ToString(),data.name.first.ToString(),data.name.last.ToString()); // Instanciation de nom
             Personne.Registered dateentreprise = new Personne.Registered(data.registered.date); // Instanciation de la date d'entré dans l'entreprise
-            Personne.ID entreprise = new Personne.ID(data.id.nom); // Instanciation du nom de l'entreprise 
+            Personne.ID entreprise = new Personne.ID(data.id.name,data.id.value); // Instanciation du nom de l'entreprise 
             Personne personne = new Personne(name, dateentreprise, entreprise,data.phone); // Instanciation de la personne
 
             #endregion
 
             #region Attributions des valeurs
 
-            LblNom.Text = (personne.name.title + " " + personne.name.last);
-            LblPrenom.Text = name.first;
-            LblEntreprise.Text = personne.id.nom;
+            LblNom.Text = (personne.name.title + " " + personne.name.last + " " + personne.name.first);
+            LblEntreprise.Text = personne.id.name;
             LblTelephone.Text = personne.phone;
+            LblService.Text = personne.id.value;
             DTPDateEntree.Text = personne.registered.date.ToString();
 
+            #endregion
+
+            #region Insertion dans la bd
+
+                try
+                {
+                    ObjBdd.InsertPersonne(personne);
+                }
+                catch (MySql.Data.MySqlClient.MySqlException probleme)
+                {
+                    MessageBox.Show("L'erreur suivante a été rencontrée : " + probleme.Message);
+                }
+            #endregion
+
+            #region Refrech DTG
+            affichageContact();
             #endregion
         }
 
@@ -132,16 +146,14 @@ namespace JFR_AnnuaireCESI
         {
             #region Récupération des valeurs 
             string Nom = DtgListeContact.Rows[e.RowIndex].Cells[0].Value.ToString();
-            string Prenom = DtgListeContact.Rows[e.RowIndex].Cells[1].Value.ToString();
-            string Telephone = DtgListeContact.Rows[e.RowIndex].Cells[2].Value.ToString();
-            string Service = DtgListeContact.Rows[e.RowIndex].Cells[3].Value.ToString();
-            string Date = DtgListeContact.Rows[e.RowIndex].Cells[4].Value.ToString();
-            string Entreprise = DtgListeContact.Rows[e.RowIndex].Cells[5].Value.ToString();
+            string Telephone = DtgListeContact.Rows[e.RowIndex].Cells[1].Value.ToString();
+            string Service = DtgListeContact.Rows[e.RowIndex].Cells[2].Value.ToString();
+            string Date = DtgListeContact.Rows[e.RowIndex].Cells[3].Value.ToString();
+            string Entreprise = DtgListeContact.Rows[e.RowIndex].Cells[4].Value.ToString();
             #endregion
 
             #region Attributions des valeurs 
             LblNom.Text = Nom;
-            LblPrenom.Text = Prenom;
             LblTelephone.Text = Telephone;
             LblService.Text = Service;
             DTPDateEntree.Text = Date;

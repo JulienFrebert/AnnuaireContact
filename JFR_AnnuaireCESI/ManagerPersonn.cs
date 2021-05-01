@@ -83,6 +83,7 @@ namespace JFR_AnnuaireCESI
             return cmd.ExecuteReader();
         }
 
+        #region Recherche
         /// <summary>
         /// Méthode qui permet de recherche une personne 
         /// </summary>
@@ -103,7 +104,41 @@ namespace JFR_AnnuaireCESI
             }
             return cmd.ExecuteReader();
         }
+        #endregion
 
+        #endregion
+
+        #region Insertion
+        /// <summary>
+        /// Permet d'insérer une nouvelle Personne dans la BD
+        /// </summary>
+        /// <param name="unePersonne">une Personne </param>
+        public void InsertPersonne(Personne unePersonne)
+        {
+            try
+            {
+                // Ouverture de la connexion
+                this.OpenConnexion();
+                MySqlCommand cmd = this.connexion.CreateCommand();
+                // Exécution de la PS --> PS_I_PERSONNE
+                cmd.CommandText = "CALL PS_I_PERSONNE(@Titre,@Nom,@Prenom,@Telephone,@Service,@DateEntree,@Entreprise)";
+                // Attribution des paramétres 
+                cmd.Parameters.AddWithValue("@Titre", unePersonne.name.title);
+                cmd.Parameters.AddWithValue("@Nom", unePersonne.name.last);
+                cmd.Parameters.AddWithValue("@Prenom", unePersonne.name.first);
+                cmd.Parameters.AddWithValue("@Telephone", unePersonne.phone);
+                cmd.Parameters.AddWithValue("@Service", unePersonne.id.value);
+                cmd.Parameters.AddWithValue("@DateEntree", unePersonne.registered.date);
+                cmd.Parameters.AddWithValue("@Entreprise", unePersonne.id.name);
+                cmd.ExecuteNonQuery();
+                this.CloseConnexion();
+            }
+            catch (MySqlException probleme)
+            {
+                MessageBox.Show(probleme.Message);
+                this.CloseConnexion();
+            }
+        }
         #endregion
 
     }

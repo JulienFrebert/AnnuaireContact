@@ -70,11 +70,13 @@ namespace JFR_AnnuaireCESI
         #region NomEntreprise
         public class ID
         {
-            public string nom { get; set; }
+            public string name { get; set; }
+            public string value { get; set; }
             #region Constructeur 
-            public ID(string unNom)
+            public ID(string unNom, string unService)
             {
-                this.nom = unNom;
+                this.name = unNom;
+                this.value = unService;
             }
             #endregion
         }

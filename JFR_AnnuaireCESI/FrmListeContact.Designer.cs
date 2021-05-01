@@ -34,21 +34,22 @@
             this.LblEntreprise = new System.Windows.Forms.Label();
             this.LblService = new System.Windows.Forms.Label();
             this.LblTelephone = new System.Windows.Forms.Label();
-            this.LblPrenom = new System.Windows.Forms.Label();
             this.LblNom = new System.Windows.Forms.Label();
             this.DTPDateEntree = new System.Windows.Forms.DateTimePicker();
             this.LblDateA = new System.Windows.Forms.Label();
             this.LblEntrepriseA = new System.Windows.Forms.Label();
             this.LblServiceA = new System.Windows.Forms.Label();
             this.LblTelA = new System.Windows.Forms.Label();
-            this.LblPrenomA = new System.Windows.Forms.Label();
             this.LblNomA = new System.Windows.Forms.Label();
-            this.LblRecherche = new System.Windows.Forms.Label();
+            this.LblRechercheNom = new System.Windows.Forms.Label();
             this.TbxRecherche = new System.Windows.Forms.TextBox();
-            this.BtnRecherche = new System.Windows.Forms.Button();
+            this.BtnRechercheNom = new System.Windows.Forms.Button();
             this.BtnReafficher = new System.Windows.Forms.Button();
             this.Btn_Quitter = new System.Windows.Forms.Button();
             this.Btn_Generer = new System.Windows.Forms.Button();
+            this.LblRechercheEntreprise = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.BtnRechercheEntreprise = new System.Windows.Forms.Button();
             this.GbxListe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DtgListeContact)).BeginInit();
             this.GbxDetail.SuspendLayout();
@@ -79,14 +80,12 @@
             this.GbxDetail.Controls.Add(this.LblEntreprise);
             this.GbxDetail.Controls.Add(this.LblService);
             this.GbxDetail.Controls.Add(this.LblTelephone);
-            this.GbxDetail.Controls.Add(this.LblPrenom);
             this.GbxDetail.Controls.Add(this.LblNom);
             this.GbxDetail.Controls.Add(this.DTPDateEntree);
             this.GbxDetail.Controls.Add(this.LblDateA);
             this.GbxDetail.Controls.Add(this.LblEntrepriseA);
             this.GbxDetail.Controls.Add(this.LblServiceA);
             this.GbxDetail.Controls.Add(this.LblTelA);
-            this.GbxDetail.Controls.Add(this.LblPrenomA);
             this.GbxDetail.Controls.Add(this.LblNomA);
             this.GbxDetail.Location = new System.Drawing.Point(1129, 17);
             this.GbxDetail.Name = "GbxDetail";
@@ -118,14 +117,6 @@
             this.LblTelephone.Name = "LblTelephone";
             this.LblTelephone.Size = new System.Drawing.Size(0, 17);
             this.LblTelephone.TabIndex = 9;
-            // 
-            // LblPrenom
-            // 
-            this.LblPrenom.AutoSize = true;
-            this.LblPrenom.Location = new System.Drawing.Point(110, 94);
-            this.LblPrenom.Name = "LblPrenom";
-            this.LblPrenom.Size = new System.Drawing.Size(0, 17);
-            this.LblPrenom.TabIndex = 8;
             // 
             // LblNom
             // 
@@ -180,15 +171,6 @@
             this.LblTelA.TabIndex = 2;
             this.LblTelA.Text = "Téléphone :";
             // 
-            // LblPrenomA
-            // 
-            this.LblPrenomA.AutoSize = true;
-            this.LblPrenomA.Location = new System.Drawing.Point(24, 94);
-            this.LblPrenomA.Name = "LblPrenomA";
-            this.LblPrenomA.Size = new System.Drawing.Size(65, 17);
-            this.LblPrenomA.TabIndex = 1;
-            this.LblPrenomA.Text = "Prenom :";
-            // 
             // LblNomA
             // 
             this.LblNomA.AutoSize = true;
@@ -198,14 +180,14 @@
             this.LblNomA.TabIndex = 0;
             this.LblNomA.Text = "Nom :";
             // 
-            // LblRecherche
+            // LblRechercheNom
             // 
-            this.LblRecherche.AutoSize = true;
-            this.LblRecherche.Location = new System.Drawing.Point(12, 17);
-            this.LblRecherche.Name = "LblRecherche";
-            this.LblRecherche.Size = new System.Drawing.Size(143, 17);
-            this.LblRecherche.TabIndex = 2;
-            this.LblRecherche.Text = "Recherche par Nom :";
+            this.LblRechercheNom.AutoSize = true;
+            this.LblRechercheNom.Location = new System.Drawing.Point(12, 17);
+            this.LblRechercheNom.Name = "LblRechercheNom";
+            this.LblRechercheNom.Size = new System.Drawing.Size(143, 17);
+            this.LblRechercheNom.TabIndex = 2;
+            this.LblRechercheNom.Text = "Recherche par Nom :";
             // 
             // TbxRecherche
             // 
@@ -214,15 +196,15 @@
             this.TbxRecherche.Size = new System.Drawing.Size(275, 22);
             this.TbxRecherche.TabIndex = 3;
             // 
-            // BtnRecherche
+            // BtnRechercheNom
             // 
-            this.BtnRecherche.Location = new System.Drawing.Point(442, 10);
-            this.BtnRecherche.Name = "BtnRecherche";
-            this.BtnRecherche.Size = new System.Drawing.Size(97, 30);
-            this.BtnRecherche.TabIndex = 4;
-            this.BtnRecherche.Text = "Recherche";
-            this.BtnRecherche.UseVisualStyleBackColor = true;
-            this.BtnRecherche.Click += new System.EventHandler(this.BtnRecherche_Click);
+            this.BtnRechercheNom.Location = new System.Drawing.Point(442, 10);
+            this.BtnRechercheNom.Name = "BtnRechercheNom";
+            this.BtnRechercheNom.Size = new System.Drawing.Size(97, 30);
+            this.BtnRechercheNom.TabIndex = 4;
+            this.BtnRechercheNom.Text = "Recherche";
+            this.BtnRechercheNom.UseVisualStyleBackColor = true;
+            this.BtnRechercheNom.Click += new System.EventHandler(this.BtnRecherche_Click);
             // 
             // BtnReafficher
             // 
@@ -254,17 +236,45 @@
             this.Btn_Generer.UseVisualStyleBackColor = true;
             this.Btn_Generer.Click += new System.EventHandler(this.Btn_Generer_Click);
             // 
+            // LblRechercheEntreprise
+            // 
+            this.LblRechercheEntreprise.AutoSize = true;
+            this.LblRechercheEntreprise.Location = new System.Drawing.Point(12, 53);
+            this.LblRechercheEntreprise.Name = "LblRechercheEntreprise";
+            this.LblRechercheEntreprise.Size = new System.Drawing.Size(179, 17);
+            this.LblRechercheEntreprise.TabIndex = 8;
+            this.LblRechercheEntreprise.Text = "Recherche par Entreprise :";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(197, 50);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(275, 22);
+            this.textBox1.TabIndex = 9;
+            // 
+            // BtnRechercheEntreprise
+            // 
+            this.BtnRechercheEntreprise.Location = new System.Drawing.Point(478, 46);
+            this.BtnRechercheEntreprise.Name = "BtnRechercheEntreprise";
+            this.BtnRechercheEntreprise.Size = new System.Drawing.Size(97, 30);
+            this.BtnRechercheEntreprise.TabIndex = 10;
+            this.BtnRechercheEntreprise.Text = "Recherche";
+            this.BtnRechercheEntreprise.UseVisualStyleBackColor = true;
+            // 
             // FrmListeContact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1720, 754);
+            this.Controls.Add(this.BtnRechercheEntreprise);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.LblRechercheEntreprise);
             this.Controls.Add(this.Btn_Generer);
             this.Controls.Add(this.Btn_Quitter);
             this.Controls.Add(this.BtnReafficher);
-            this.Controls.Add(this.BtnRecherche);
+            this.Controls.Add(this.BtnRechercheNom);
             this.Controls.Add(this.TbxRecherche);
-            this.Controls.Add(this.LblRecherche);
+            this.Controls.Add(this.LblRechercheNom);
             this.Controls.Add(this.GbxDetail);
             this.Controls.Add(this.GbxListe);
             this.Name = "FrmListeContact";
@@ -285,24 +295,25 @@
         private System.Windows.Forms.GroupBox GbxListe;
         private System.Windows.Forms.DataGridView DtgListeContact;
         private System.Windows.Forms.GroupBox GbxDetail;
-        private System.Windows.Forms.Label LblRecherche;
+        private System.Windows.Forms.Label LblRechercheNom;
         private System.Windows.Forms.TextBox TbxRecherche;
-        private System.Windows.Forms.Button BtnRecherche;
+        private System.Windows.Forms.Button BtnRechercheNom;
         private System.Windows.Forms.Button BtnReafficher;
         private System.Windows.Forms.DateTimePicker DTPDateEntree;
         private System.Windows.Forms.Label LblDateA;
         private System.Windows.Forms.Label LblEntrepriseA;
         private System.Windows.Forms.Label LblServiceA;
         private System.Windows.Forms.Label LblTelA;
-        private System.Windows.Forms.Label LblPrenomA;
         private System.Windows.Forms.Label LblNomA;
         private System.Windows.Forms.Label LblEntreprise;
         private System.Windows.Forms.Label LblService;
         private System.Windows.Forms.Label LblTelephone;
-        private System.Windows.Forms.Label LblPrenom;
         private System.Windows.Forms.Label LblNom;
         private System.Windows.Forms.Button Btn_Quitter;
         private System.Windows.Forms.Button Btn_Generer;
+        private System.Windows.Forms.Label LblRechercheEntreprise;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button BtnRechercheEntreprise;
     }
 }
 

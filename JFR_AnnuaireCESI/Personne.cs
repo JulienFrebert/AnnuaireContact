@@ -11,29 +11,83 @@ namespace JFR_AnnuaireCESI
 {
     public class Personne
     {
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public string Telephone { get; set; }
-        public string Service { get; set; }
-        public string Entreprise { get; set; }
-        public DateTime DateEntree { get; set; }
+        public string gender { get; set; }
+        public Name name { get; set; }
+        public string email { get; set; }
+        public Registered registered { get; set; }
+        public ID id { get; set; }
+        public string phone { get; set; }
 
+        #region Constructeur 
 
-        public Personne(string unNom,string unPrenom, string unTelephone, string unService, string uneEntreprise,DateTime uneDateEntree)
+        public Personne(Name unNom, Registered unRegistered, ID unid, string unphone)
         {
-            this.Nom = unNom;
-            this.Prenom = unPrenom;
-            this.Telephone = unTelephone;
-            this.Service = unService;
-            this.Entreprise = uneEntreprise;
-            this.DateEntree = uneDateEntree;
+            this.name = unNom;
+            this.registered = unRegistered;
+            this.id = unid;
+            this.phone = unphone;
         }
 
-        string v1 = "https://randomuser.me/api/";
+        #endregion
 
+        #region Nom
+        public class Name
+        {
+            public string title { get; set; }
+            public string first { get; set; }
+            public string last { get; set; }
+
+            #region Constructeur 
+
+            public Name(string unTitre, string unPrenom, string unNom)
+            {
+                this.title = unTitre;
+                this.first = unPrenom;
+                this.last = unNom;
+            }
+            #endregion
+        }
+
+        #endregion
+
+        #region Entreprise
+
+        #region Date d'entrée
+        public class Registered
+        {
+            public DateTime date { get; set; }
+            #region Constructeur
+            public Registered(DateTime unedate)
+            {
+                this.date = unedate;
+            }
+            #endregion
+        }
+        #endregion
+
+
+
+        #region NomEntreprise
+        public class ID
+        {
+            public string nom { get; set; }
+            #region Constructeur 
+            public ID(string unNom)
+            {
+                this.nom = unNom;
+            }
+            #endregion
+        }
+        #endregion
+
+        #endregion
     }
-
 }
+    
+
+
+
+
 
 
 

@@ -7,7 +7,7 @@ Pour générer une nouvelle personne il suffit de cliquer sur Générer
 
 Il y'a 2 types de recherche soit par nom ou par entreprise (attention pour le nom il ne faut pas mettre le titre "Mr ou Mme")
 
-Pour que l'application fonctionne bien veulliez avant de la démarrer crée la base de données annuaire dans PhpMyAdmin 
+Pour que l'application fonctionne bien veulliez avant de la démarrer importe la base de données annuaire avec le fichier "annuaire.sql"  dans PhpMyAdmin 
 et de modifier dans le code dans la classe ManagerPersonn dans la region Attributs ->
 connectionString = "SERVER=127.0.0.1; DATABASE=annuaire ; UID=root; PASSWORD="; //Identifiants de connexion à la BD
 Instancier vos identifiants si jamais il ne son pas comme ceux déjà écrits 

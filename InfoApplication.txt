@@ -10,6 +10,6 @@ Il y'a 2 types de recherche soit par nom ou par entreprise (attention pour le no
 Pour que l'application fonctionne bien veuillez avant de la démarrer importe la base de données annuaire avec le fichier "annuaire.sql"  dans PhpMyAdmin 
 et de modifier dans le code dans la classe ManagerPersonn dans la region Attributs ->
 connectionString = "SERVER=127.0.0.1; DATABASE=annuaire ; UID=root; PASSWORD="; //Identifiants de connexion à la BD
-Instancier vos identifiants si jamais ils ne sont pas comme ceux déjà écrits 
+Modifier les identifiants si jamais ils ne sont pas comme ceux déjà écrits 
 
 Cordialement, Julien Frébert.

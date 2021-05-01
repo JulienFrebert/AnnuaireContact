@@ -42,6 +42,7 @@ namespace JFR_AnnuaireCESI
                 MessageBox.Show("Impossible de se connecter au serveur de base de données: " + probleme.Message);
             }
         }
+
         /// <summary>
         /// Ouvre la connexion à la base de données
         /// </summary>
@@ -60,12 +61,11 @@ namespace JFR_AnnuaireCESI
         #endregion
 
         #region Select
+
+        #region Select 
         /// <summary>
-        /// Avec le nom de la table en paramètre affiche toutes les infos de cette table grâce aux PS enregistrées dans la base de données
-        /// Nécessite ouverture préalable de la connexion et fermeture après utilisation du DataReader.
-        /// Si l'id est spécifié, la requete select se fera avec une clause where portant sur la PK de la table avec comme valeur l'ID.
         /// </summary>
-        /// <param name="Nom_PS">Une chaine: Nom de la table de la PS --> ENTREPRISE/ETUDIANT/...</param>
+        /// <param name="Nom_PS">Une chaine: Nom de la table </param>
         /// <param name="id">Un entier: Valeur par défaut à -1.</param>
         /// <returns>Retourne les résultats</returns>
         public MySqlDataReader Select(string Nom_PS, int id = -1)
@@ -82,20 +82,22 @@ namespace JFR_AnnuaireCESI
             }
             return cmd.ExecuteReader();
         }
+        #endregion
 
-        #region Recherche
+        #region Select Where
+
         /// <summary>
-        /// Méthode qui permet de recherche une personne 
+        /// Méthode qui permet de recherche une personne par Nom
         /// </summary>
         /// <param name="Nom_PS"></param>
         /// <param name="recherche">un nom</param>
         /// <returns></returns>
-        public MySqlDataReader SelectRecherche(string Nom_PS, string recherche)
+        public MySqlDataReader SelectRechercheNom(string Nom_PS, string recherche)
         {
             MySqlCommand cmd = this.connexion.CreateCommand();
             try
             {
-                cmd.CommandText = "CALL PS_S_W_R_" + Nom_PS + "(@Code)";
+                cmd.CommandText = "CALL PS_S_W_N_" + Nom_PS + "(@Code)";
                 cmd.Parameters.AddWithValue("@Code", recherche);
             }
             catch
@@ -104,6 +106,28 @@ namespace JFR_AnnuaireCESI
             }
             return cmd.ExecuteReader();
         }
+
+        /// <summary>
+        /// Méthode qui permet de recherche une personne par Entreprise
+        /// </summary>
+        /// <param name="Nom_PS"></param>
+        /// <param name="recherche">un nom</param>
+        /// <returns></returns>
+        public MySqlDataReader SelectRechercheEntreprise(string Nom_PS, string recherche)
+        {
+            MySqlCommand cmd = this.connexion.CreateCommand();
+            try
+            {
+                cmd.CommandText = "CALL PS_S_W_E_" + Nom_PS + "(@Code)";
+                cmd.Parameters.AddWithValue("@Code", recherche);
+            }
+            catch
+            {
+                MessageBox.Show("La recherche que vous avez faite ne correspond pas à une personne", "Erreur");
+            }
+            return cmd.ExecuteReader();
+        }
+
         #endregion
 
         #endregion

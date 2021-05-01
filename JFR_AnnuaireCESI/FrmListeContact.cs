@@ -33,6 +33,7 @@ namespace JFR_AnnuaireCESI
 
         #region Procédures
 
+        #region Affichage
         private void affichageContact()
         {
             ObjBdd.OpenConnexion();
@@ -47,12 +48,12 @@ namespace JFR_AnnuaireCESI
             ObjBdd.CloseConnexion();
         }
 
-        private void affichageRecherche()
+        private void affichageRechercheNom()
         {
-            if (TbxRecherche.Text != "")
+            if (TbxRechercheNom.Text != "")
             {
                 ObjBdd.OpenConnexion();
-                MySqlDataReader sdrListe = ObjBdd.SelectRecherche("PERSONNE", TbxRecherche.Text);
+                MySqlDataReader sdrListe = ObjBdd.SelectRechercheNom("PERSONNE", TbxRechercheNom.Text);
                 DataTable Dt1 = new DataTable();
                 Dt1.Load(sdrListe);
                 DtgListeContact.DataSource = Dt1;
@@ -65,103 +66,26 @@ namespace JFR_AnnuaireCESI
 
         }
 
+        private void affichageRechercheEntreprise()
+        {
+            if (TbxRechercheEntreprise.Text != "")
+            {
+                ObjBdd.OpenConnexion();
+                MySqlDataReader sdrListe = ObjBdd.SelectRechercheEntreprise("PERSONNE", TbxRechercheEntreprise.Text);
+                DataTable Dt1 = new DataTable();
+                Dt1.Load(sdrListe);
+                DtgListeContact.DataSource = Dt1;
+                DtgListeContact.ReadOnly = true;
+                DtgListeContact.Refresh();
+                DtgListeContact.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                DtgListeContact.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+                ObjBdd.CloseConnexion();
+            }
+
+        }
         #endregion
 
-        #region Affichage et boutons
-
-        public FrmListeContact()
-        {
-            InitializeComponent();
-        }
-
-        private void FrmListeContact_Load(object sender, EventArgs e)
-        {
-            affichageContact();
-        }
-
-        private void BtnRecherche_Click(object sender, EventArgs e)
-        {
-            affichageRecherche();
-        }
-
-        private void BtnReafficher_Click(object sender, EventArgs e)
-        {
-            affichageContact();
-        }
-
-        private void Btn_Quitter_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Btn_Generer_Click(object sender, EventArgs e)
-        {
-            #region Récupération des valeurs
-           var JSON =  getRamdomUser().GetAwaiter().GetResult();
-           var data = JObject.Parse(JSON).SelectToken("results").ToObject<List<Personne>>().First();
-
-            #endregion
-
-            #region Instanciation de personne
-
-            Personne.Name name = new Personne.Name(data.name.title.ToString(),data.name.first.ToString(),data.name.last.ToString()); // Instanciation de nom
-            Personne.Registered dateentreprise = new Personne.Registered(data.registered.date); // Instanciation de la date d'entré dans l'entreprise
-            Personne.ID entreprise = new Personne.ID(data.id.name,data.id.value); // Instanciation du nom de l'entreprise 
-            Personne personne = new Personne(name, dateentreprise, entreprise,data.phone); // Instanciation de la personne
-
-            #endregion
-
-            #region Attributions des valeurs
-
-            LblNom.Text = (personne.name.title + " " + personne.name.last + " " + personne.name.first);
-            LblEntreprise.Text = personne.id.name;
-            LblTelephone.Text = personne.phone;
-            LblService.Text = personne.id.value;
-            DTPDateEntree.Text = personne.registered.date.ToString();
-
-            #endregion
-
-            #region Insertion dans la bd
-
-                try
-                {
-                    ObjBdd.InsertPersonne(personne);
-                }
-                catch (MySql.Data.MySqlClient.MySqlException probleme)
-                {
-                    MessageBox.Show("L'erreur suivante a été rencontrée : " + probleme.Message);
-                }
-            #endregion
-
-            #region Refrech DTG
-            affichageContact();
-            #endregion
-        }
-
-        #endregion
-
-        #region DTGListeContact
-
-        private void DtgListeContact_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            #region Récupération des valeurs 
-            string Nom = DtgListeContact.Rows[e.RowIndex].Cells[0].Value.ToString();
-            string Telephone = DtgListeContact.Rows[e.RowIndex].Cells[1].Value.ToString();
-            string Service = DtgListeContact.Rows[e.RowIndex].Cells[2].Value.ToString();
-            string Date = DtgListeContact.Rows[e.RowIndex].Cells[3].Value.ToString();
-            string Entreprise = DtgListeContact.Rows[e.RowIndex].Cells[4].Value.ToString();
-            #endregion
-
-            #region Attributions des valeurs 
-            LblNom.Text = Nom;
-            LblTelephone.Text = Telephone;
-            LblService.Text = Service;
-            DTPDateEntree.Text = Date;
-            LblEntreprise.Text = Entreprise;
-            #endregion
-        }
-
-        #endregion
+        #region Génération
 
         #region Appel API RandomUser
 
@@ -185,6 +109,122 @@ namespace JFR_AnnuaireCESI
             }
             return data;
         }
+
+        #endregion
+
+        #region Procédure génération
+        public void Generation()
+        {
+            #region Récupération des valeurs
+            var JSON = getRamdomUser().GetAwaiter().GetResult();
+            var data = JObject.Parse(JSON).SelectToken("results").ToObject<List<Personne>>().First();
+
+            #endregion
+
+            #region Instanciation de personne
+
+            Personne.Name name = new Personne.Name(data.name.title.ToString(), data.name.first.ToString(), data.name.last.ToString()); // Instanciation de nom
+            Personne.Registered dateentreprise = new Personne.Registered(data.registered.date); // Instanciation de la date d'entré dans l'entreprise
+            Personne.ID entreprise = new Personne.ID(data.id.name, data.id.value); // Instanciation du nom de l'entreprise 
+            Personne personne = new Personne(name, dateentreprise, entreprise, data.phone); // Instanciation de la personne
+
+            #endregion
+
+            #region Attributions des valeurs
+
+            LblNom.Text = (personne.name.title + " " + personne.name.last + " " + personne.name.first);
+            LblEntreprise.Text = personne.id.name;
+            LblTelephone.Text = personne.phone;
+            LblService.Text = personne.id.value;
+            DTPDateEntree.Text = personne.registered.date.ToString();
+
+            #endregion
+
+            #region Insertion dans la bd
+
+            try
+            {
+                ObjBdd.InsertPersonne(personne);
+            }
+            catch (MySql.Data.MySqlClient.MySqlException probleme)
+            {
+                MessageBox.Show("L'erreur suivante a été rencontrée : " + probleme.Message);
+            }
+            #endregion
+
+        }
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Affichage et boutons
+
+        public FrmListeContact()
+        {
+            InitializeComponent();
+        }
+
+        private void FrmListeContact_Load(object sender, EventArgs e)
+        {
+            affichageContact();
+        }
+
+        private void BtnRecherche_Click(object sender, EventArgs e)
+        {
+            affichageRechercheNom();
+        }
+
+        private void BtnRechercheEntreprise_Click(object sender, EventArgs e)
+        {
+            affichageRechercheEntreprise();
+        }
+
+        private void BtnReafficher_Click(object sender, EventArgs e)
+        {
+            affichageContact();
+        }
+
+        private void Btn_Quitter_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Btn_Generer_Click(object sender, EventArgs e)
+        {
+
+            Generation();
+            affichageContact();
+            
+        }
+        #endregion
+
+        #region DTGListeContact
+
+        private void DtgListeContact_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            #region Récupération des valeurs 
+            string Nom = DtgListeContact.Rows[e.RowIndex].Cells[0].Value.ToString();
+            string Prenom = DtgListeContact.Rows[e.RowIndex].Cells[1].Value.ToString();
+            string Telephone = DtgListeContact.Rows[e.RowIndex].Cells[2].Value.ToString();
+            string Service = DtgListeContact.Rows[e.RowIndex].Cells[3].Value.ToString();
+            string Date = DtgListeContact.Rows[e.RowIndex].Cells[4].Value.ToString();
+            string Entreprise = DtgListeContact.Rows[e.RowIndex].Cells[5].Value.ToString();
+            #endregion
+
+            #region Attributions des valeurs 
+            LblNom.Text = Nom;
+            LblPrenom.Text = Prenom;
+            LblTelephone.Text = Telephone;
+            LblService.Text = Service;
+            DTPDateEntree.Text = Date.ToString();
+            LblEntreprise.Text = Entreprise;
+            #endregion
+        }
+
+
 
         #endregion
 

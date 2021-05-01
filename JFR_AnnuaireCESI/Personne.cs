@@ -56,6 +56,7 @@ namespace JFR_AnnuaireCESI
         public class Registered
         {
             public DateTime date { get; set; }
+
             #region Constructeur
             public Registered(DateTime unedate)
             {
@@ -72,6 +73,7 @@ namespace JFR_AnnuaireCESI
         {
             public string name { get; set; }
             public string value { get; set; }
+
             #region Constructeur 
             public ID(string unNom, string unService)
             {

@@ -189,7 +189,7 @@ namespace JFR_AnnuaireCESI
 
         private void Btn_Quitter_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void Btn_Generer_Click(object sender, EventArgs e)
